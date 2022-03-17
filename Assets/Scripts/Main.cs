@@ -9,10 +9,14 @@ using System.Collections;
 
 public class Main : MonoBehaviour
 {
+
+    public Trivial trivial;
     void Start()
     {
-        // A correct website page.
-        StartCoroutine(GetRequest("https://servizos.meteogalicia.gal/mgrss/predicion/jsonCPrazo.action?dia=0&request_locale=gl"));
+        
+        //StartCoroutine(GetRequest("https://servizos.meteogalicia.gal/mgrss/predicion/jsonCPrazo.action?dia=0&request_locale=gl"));
+
+        StartCoroutine(GetRequest("https://opentdb.com/api.php?amount=5&category=15"));
 
         
     }
@@ -38,8 +42,20 @@ public class Main : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                    break;
+                    break;               
             }
+            trivial = JsonUtility.FromJson<Trivial>(webRequest.downloadHandler.text);
+
+            Debug.Log(trivial.results[Random.Range(0, 5)].question);
+            Debug.Log(trivial.results[3].incorrect_answers[2]);
+            Debug.Log(trivial.results[4].difficulty);
         }
-    }
+    }   
+
+
+   
+
+    
+    
+
 }
