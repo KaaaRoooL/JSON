@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class Pregunta : Trivial
+public class Pregunta
 {
     public string category;
     public string type;
